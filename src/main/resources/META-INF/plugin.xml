@@ -16,7 +16,18 @@
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
+        <group id="MyPlugin.SampleMenu" text="_Sample Menu" description="Sample menu">
+            <add-to-group group-id="MainMenu" anchor="last"  />
+            <action id="Myplugin.Textboxes" class="TextBoxes" text="Text _Boxes" description="A test menu item" />
+        </group>
+
+
+        <action id="MyPlugin.Textboxes" class="TextBoxes" text="Make action in editor!">
+            <keyboard-shortcut first-keystroke="ctrl shift d" keymap="$default"/>
+        </action>
+
     </actions>
+
+
 </idea-plugin>
 
