@@ -22,21 +22,21 @@ public class Changer extends ChangeAction {
   }
 
   @Override
-  protected void action(String text, String dependencyText) {
+  protected void action(String text, String fileType, String dependencyText) {
     if(editor != null){
       LookupManager lookupManager = LookupManager.getInstance(editor.getProject());
       ApplicationManager
-          .getApplication().invokeLater(() -> lookupManager.showLookup(editor, getProposeList(dependencyText)));
+          .getApplication().invokeLater(() -> lookupManager.showLookup(editor, getProposeList(dependencyText, fileType)));
     }
   }
 
 
-  public LookupElement[] getProposeList(@NotNull String text) {
+  public LookupElement[] getProposeList(@NotNull String text, @NotNull String fileType) {
 
     List<String> listl = new ArrayList<>();
 
     listl.add(text + "1");
-    listl.add(text + "2");
+    listl.add(fileType + "//");
     listl.add(text + "3");
 
     return listl.stream()
