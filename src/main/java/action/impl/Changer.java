@@ -4,7 +4,6 @@ import action.ChangeAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInsight.lookup.LookupManager;
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
@@ -36,9 +35,9 @@ public class Changer extends ChangeAction {
 
     List<String> listl = new ArrayList<>();
 
-    listl.add("안녕?");
-    listl.add("뽀로로");
-    listl.add("크롱");
+    listl.add(text + "1");
+    listl.add(text + "2");
+    listl.add(text + "3");
 
     return listl.stream()
         .map(LookupElementBuilder::create)
