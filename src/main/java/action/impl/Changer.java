@@ -14,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Changer extends ChangeAction {
 
+  private static final String REQUEST_URL = "https://mvnrepository.com/search?q={}&sort=popular";
+
   private Editor editor;
 
   @Override
@@ -35,9 +37,11 @@ public class Changer extends ChangeAction {
 
     List<String> listl = new ArrayList<>();
 
+    String url = REQUEST_URL.replace("{}", text);
+
     listl.add(text + "1");
     listl.add(fileType + "//");
-    listl.add(text + "3");
+    listl.add(url);
 
     return listl.stream()
         .map(LookupElementBuilder::create)
