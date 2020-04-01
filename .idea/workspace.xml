@@ -9,8 +9,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/action/ChangeAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/action/ChangeAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/action/impl/Changer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/action/impl/Changer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/Dependency.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/model/Dependency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +65,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -162,7 +163,7 @@
       <workItem from="1585568737548" duration="4578000" />
       <workItem from="1585656482304" duration="3741000" />
       <workItem from="1585660484676" duration="167000" />
-      <workItem from="1585734878850" duration="557000" />
+      <workItem from="1585734878850" duration="4397000" />
     </task>
     <servers />
   </component>
@@ -190,22 +191,22 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="690" y="421" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1680.1050@0.0.1680.1050" timestamp="1585657079580" />
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1585660295750">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom" timestamp="1585743553363">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1585660295750" />
-    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1585660295749">
+    <state width="1638" height="295" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1585743553363" />
+    <state width="1638" height="295" key="GridCell.Tab.0.center" timestamp="1585743553362">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1585660295749" />
-    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1585660295748">
+    <state width="1638" height="295" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1585743553362" />
+    <state width="1638" height="295" key="GridCell.Tab.0.left" timestamp="1585743553362">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1585660295748" />
-    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1585660295749">
+    <state width="1638" height="295" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1585743553362" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right" timestamp="1585743553363">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1585660295749" />
+    <state width="1638" height="295" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1585743553363" />
     <state width="1638" height="363" key="GridCell.Tab.1.bottom" timestamp="1585656959742">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -222,10 +223,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1638" height="363" key="GridCell.Tab.1.right/0.0.1680.1050@0.0.1680.1050" timestamp="1585656959741" />
-    <state x="349" y="164" key="SettingsEditor" timestamp="1585657289238">
+    <state x="349" y="164" key="SettingsEditor" timestamp="1585742643562">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="349" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1585657289238" />
+    <state x="349" y="164" key="SettingsEditor/0.0.1680.1050@0.0.1680.1050" timestamp="1585742643562" />
     <state x="440" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1585570061384">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
@@ -235,9 +236,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="506" y="287" width="667" height="476" key="find.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1585657008378" />
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1585656599860">
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup" timestamp="1585742421502">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
-    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1585656599860" />
+    <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1585742421502" />
   </component>
 </project>

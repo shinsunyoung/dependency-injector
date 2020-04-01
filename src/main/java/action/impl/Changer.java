@@ -11,7 +11,6 @@ import com.intellij.openapi.editor.Editor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import model.Dependency;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,6 +30,8 @@ public class Changer extends ChangeAction {
 
   @Override
   protected void action(String text, String fileType, String dependencyText) {
+
+
     if (editor != null) {
       LookupManager lookupManager = LookupManager.getInstance(editor.getProject());
       ApplicationManager
@@ -42,7 +43,7 @@ public class Changer extends ChangeAction {
 
   public LookupElement[] getProposeList(@NotNull String text, @NotNull String fileType) {
 
-    List<String> listl = new ArrayList<>();
+    List<LookupElement> lookupElements = new ArrayList<>();
 
     String url = REQUEST_URL.replace("{}", text);
 
@@ -55,7 +56,7 @@ public class Changer extends ChangeAction {
 
       for (Element content : contents) {
 
-        if(listl.size() >= 5){
+        if(lookupElements.size() >= 5){
           break;
         }
 
@@ -63,7 +64,13 @@ public class Changer extends ChangeAction {
           temp = content.text();
           count++;
         } else if (count == 1) {
-          listl.add(content.text() + "(" + temp + ")");
+
+
+
+          LookupElement element = LookupElementBuilder
+              .create("test") // value
+              .withPresentableText(content.text() + "(" + temp + ")"); // key
+          lookupElements.add(element);
         }
       }
 
@@ -75,8 +82,7 @@ public class Changer extends ChangeAction {
       ex.printStackTrace();
     }
 
-    return listl.stream()
-        .map(LookupElementBuilder::create)
+    return lookupElements.stream()
         .toArray(LookupElement[]::new);
   }
 }

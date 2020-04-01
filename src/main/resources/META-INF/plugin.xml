@@ -17,7 +17,7 @@
 
     <actions>
 
-        <action id="action.impl.Changer" class="action.impl.Changer" text="Make action in editor!">
+        <action id="action.impl.Changer" class="action.impl.Changer" text="change dependency">
             <keyboard-shortcut first-keystroke="ctrl shift d" keymap="$default"/>
         </action>
 
