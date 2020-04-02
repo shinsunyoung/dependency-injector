@@ -61,7 +61,9 @@ public class Changer extends ChangeAction {
           break;
         }
 
-        Document subDocs = Jsoup.connect("https://mvnrepository.com/artifact/"+contents.get(i).text()+"/"+contents.get(i+1).text()).get();
+        String subUrl = "https://mvnrepository.com/artifact/"+contents.get(i).text()+"/"+contents.get(i+1).text();
+
+        Document subDocs = Jsoup.connect(subUrl).get();
         Elements subContents = subDocs.select("tbody tr td a.vbtn.release");
         Elements subPopular = subDocs.select("tbody tr td:nth-last-child(2)");
 
@@ -89,7 +91,7 @@ public class Changer extends ChangeAction {
         dependency.setPopular(max);
 
         LookupElement element = LookupElementBuilder
-            .create(dependency.getVersion()) // value. 값이 중복되면 하나만 나옴
+            .create(dependency.getSource(subUrl, fileType)) // value. 값이 중복되면 하나만 나옴
             .withPresentableText(contents.get(i+1).text() + "(" + contents.get(i).text() + ")"); // key
         lookupElements.add(element);
 
