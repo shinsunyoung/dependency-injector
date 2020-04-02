@@ -6,15 +6,19 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 
-public class Dependency implements Comparable<Dependency> {
+public class Dependency {
 //  private String group;
 //  private String name;
   private String version;
 //  private String build;
-  private String popular;
+  private int popular;
 
-  public Dependency(String version, String popular) {
+
+  public void setVersion(String version) {
     this.version = version;
+  }
+
+  public void setPopular(int popular) {
     this.popular = popular;
   }
 
@@ -22,12 +26,10 @@ public class Dependency implements Comparable<Dependency> {
     return version;
   }
 
-  public String getPopular() {
+  public int getPopular() {
     return popular;
   }
 
-  @Override
-  public int compareTo(@NotNull Dependency o) {
-    return o.popular.compareTo(this.popular);
+  public Dependency() {
   }
 }

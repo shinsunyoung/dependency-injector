@@ -16,6 +16,7 @@ import model.Dependency;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Changer extends ChangeAction {
@@ -61,16 +62,34 @@ public class Changer extends ChangeAction {
         }
 
         Document subDocs = Jsoup.connect("https://mvnrepository.com/artifact/"+contents.get(i).text()+"/"+contents.get(i+1).text()).get();
-        Elements subContents = subDocs.select("tbody tr td a");
+        Elements subContents = subDocs.select("tbody tr td a.vbtn.release");
+        Elements subPopular = subDocs.select("tbody tr td:nth-last-child(2)");
 
-        PriorityQueue<Dependency> dependencies = new PriorityQueue<>();
+        int max = 0;
+        String version = "";
 
-        for(int j=1; j<subContents.size()-3; j+=3){
-          dependencies.add(new Dependency(subContents.get(j).text(), subContents.get(j+2).text()));
+        for(int j=0; j<subContents.size(); j++){
+
+          Elements searchByA = subPopular.get(j).select("a");
+
+          if(searchByA.size() != 0){
+
+            int popular = Integer.parseInt(searchByA.get(0).text().replaceAll(",",""));
+
+            if(max < popular){
+              max = popular;
+              version = subContents.get(j).text();
+            }
+          }
         }
 
+        Dependency dependency = new Dependency();
+
+        dependency.setVersion(version);
+        dependency.setPopular(max);
+
         LookupElement element = LookupElementBuilder
-            .create(dependencies.peek().getVersion()) // value. 값이 중복되면 하나만 나옴
+            .create(dependency.getVersion()) // value. 값이 중복되면 하나만 나옴
             .withPresentableText(contents.get(i+1).text() + "(" + contents.get(i).text() + ")"); // key
         lookupElements.add(element);
 
