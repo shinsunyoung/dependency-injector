@@ -17,7 +17,7 @@ public class FileInfo {
   }
 
   public String getBuildName(){
-    if(this.name.equals("pom.xml")){
+    if(this.name.contains(".xml")){
       this.build = "maven";
     }
     else{
