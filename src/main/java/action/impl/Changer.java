@@ -16,7 +16,6 @@ import model.Dependency;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Changer extends ChangeAction {
@@ -66,13 +65,8 @@ public class Changer extends ChangeAction {
 
         PriorityQueue<Dependency> dependencies = new PriorityQueue<>();
 
-        for(int j=1; j<subContents.size(); j+=3){
-
-          dependencies.add(
-              Dependency.builder()
-              .version(subContents.get(i).text())
-              .popular(Integer.parseInt(subContents.get(i+2).text()))
-              .build());
+        for(int j=1; j<subContents.size()-3; j+=3){
+          dependencies.add(new Dependency(subContents.get(j).text(), subContents.get(j+2).text()));
         }
 
         LookupElement element = LookupElementBuilder
