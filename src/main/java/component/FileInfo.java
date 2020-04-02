@@ -3,9 +3,7 @@ package component;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
-import lombok.Getter;
 
-@Getter
 public class FileInfo {
 
   private String name;
@@ -16,17 +14,15 @@ public class FileInfo {
     this.name = vFile != null ? vFile.getName() : "";
   }
 
-  public String getBuildName(){
-    if(this.name.contains(".xml")){
+  public String getBuildName() {
+    if (this.name.contains(".xml")) {
       this.build = "maven";
-    }
-    else{
+    } else {
       this.build = "gradle";
     }
 
     return this.build;
 
   }
-
 
 }

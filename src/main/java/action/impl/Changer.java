@@ -11,12 +11,10 @@ import com.intellij.openapi.editor.Editor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
 import model.Dependency;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class Changer extends ChangeAction {
@@ -32,7 +30,6 @@ public class Changer extends ChangeAction {
 
   @Override
   protected void action(String text, String fileType, String dependencyText) {
-
 
     if (editor != null) {
       LookupManager lookupManager = LookupManager.getInstance(editor.getProject());
@@ -55,13 +52,15 @@ public class Changer extends ChangeAction {
 
       int count = 0;
 
-      for(int i=0; i<contents.size(); i+=2){
+      for (int i = 0; i < contents.size(); i += 2) {
 
-        if(count >= 3){
+        if (count >= 3) { // 리스트 최대 갯수 3
           break;
         }
 
-        String subUrl = "https://mvnrepository.com/artifact/"+contents.get(i).text()+"/"+contents.get(i+1).text();
+        String subUrl =
+            "https://mvnrepository.com/artifact/" + contents.get(i).text() + "/" + contents
+                .get(i + 1).text();
 
         Document subDocs = Jsoup.connect(subUrl).get();
         Elements subContents = subDocs.select("tbody tr td a.vbtn.release");
@@ -70,15 +69,15 @@ public class Changer extends ChangeAction {
         int max = 0;
         String version = "";
 
-        for(int j=0; j<subContents.size(); j++){
+        for (int j = 0; j < subContents.size(); j++) {
 
           Elements searchByA = subPopular.get(j).select("a");
 
-          if(searchByA.size() != 0){
+          if (searchByA.size() != 0) { // size 0 == 0
 
-            int popular = Integer.parseInt(searchByA.get(0).text().replaceAll(",",""));
+            int popular = Integer.parseInt(searchByA.get(0).text().replaceAll(",", ""));
 
-            if(max < popular){
+            if (max < popular) {
               max = popular;
               version = subContents.get(j).text();
             }
@@ -87,12 +86,13 @@ public class Changer extends ChangeAction {
 
         Dependency dependency = new Dependency();
 
-        dependency.setVersion(version);
+        dependency.setVersion(version); // 가장 인기 있는 버전
         dependency.setPopular(max);
 
         LookupElement element = LookupElementBuilder
             .create(dependency.getSource(subUrl, fileType)) // value. 값이 중복되면 하나만 나옴
-            .withPresentableText(contents.get(i+1).text() + "(" + contents.get(i).text() + ")"); // key
+            .withPresentableText(
+                contents.get(i + 1).text() + "(" + contents.get(i).text() + ")"); // key
         lookupElements.add(element);
 
         count++;
