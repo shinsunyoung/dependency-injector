@@ -11,6 +11,8 @@ import com.intellij.openapi.editor.Editor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
+import model.Dependency;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -52,31 +54,34 @@ public class Changer extends ChangeAction {
       Elements contents = doc.select(".im-subtitle a");
 
       int count = 0;
-      String temp = "";
 
-      for (Element content : contents) {
+      for(int i=0; i<contents.size(); i+=2){
 
-        if(lookupElements.size() >= 5){
+        if(count >= 3){
           break;
         }
 
-        if (count == 0) {
-          temp = content.text();
-          count++;
-        } else if (count == 1) {
+        Document subDocs = Jsoup.connect("https://mvnrepository.com/artifact/"+contents.get(i).text()+"/"+contents.get(i+1).text()).get();
+        Elements subContents = subDocs.select("tbody tr td a");
 
+        PriorityQueue<Dependency> dependencies = new PriorityQueue<>();
 
+        for(int j=1; j<subContents.size(); j+=3){
 
-          LookupElement element = LookupElementBuilder
-              .create("test") // value
-              .withPresentableText(content.text() + "(" + temp + ")"); // key
-          lookupElements.add(element);
+          dependencies.add(
+              Dependency.builder()
+              .version(subContents.get(i).text())
+              .popular(Integer.parseInt(subContents.get(i+2).text()))
+              .build());
         }
-      }
 
-//      listl.add(text + "1");
-//      listl.add(fileType);
-//      listl.add(url);
+        LookupElement element = LookupElementBuilder
+            .create(dependencies.peek().getVersion()) // value. 값이 중복되면 하나만 나옴
+            .withPresentableText(contents.get(i+1).text() + "(" + contents.get(i).text() + ")"); // key
+        lookupElements.add(element);
+
+        count++;
+      }
 
     } catch (IOException ex) {
       ex.printStackTrace();
