@@ -50,7 +50,10 @@ public class Dependency {
 
     if(content.size() == 0) return "not found!";
 
-    return content.get(0).text();
+    String text = fileType.equals("gradle") ? content.get(0).text().replaceAll("\n", "\n\t") : content.get(0).text();
+
+    return text;
+
   }
 
 }
