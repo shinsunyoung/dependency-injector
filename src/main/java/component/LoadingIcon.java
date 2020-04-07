@@ -1,4 +1,4 @@
-package util;
+package component;
 
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.ui.AnimatedIcon;

@@ -1,23 +1,22 @@
-package util;
+package component;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.popup.Balloon;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.ui.awt.RelativePoint;
 import com.intellij.util.ui.AnimatedIcon;
-import component.Selector;
 import java.awt.BorderLayout;
 import java.awt.Point;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import org.jetbrains.annotations.Nullable;
 
-public class LoadingUtils {
+public class Loading {
 
   private AnActionEvent e;
   private Balloon balloon;
 
-  public LoadingUtils(@Nullable AnActionEvent e) {
+  public Loading(@Nullable AnActionEvent e) {
     this.e = e;
   }
 

@@ -6,7 +6,7 @@ import component.FileInfo;
 import component.Selector;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
-import util.LoadingUtils;
+import component.Loading;
 
 public abstract class ChangeAction extends AnAction {
 
@@ -14,7 +14,7 @@ public abstract class ChangeAction extends AnAction {
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
 
-    LoadingUtils loadingComponent = new LoadingUtils(e);
+    Loading loadingComponent = new Loading(e);
     loadingComponent.showPopUp();
 
     String selectedText = new Selector(e).getSelectedText();
