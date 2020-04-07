@@ -29,10 +29,7 @@ public class Dependency {
       return "not found!";
     }
 
-    String text = fileType.equals("gradle") ? content.get(0).text().replaceAll("\n", "\n\t")
-        : content.get(0).text();
-
-    return text;
+    return content.get(0).text().replaceAll("\n", "\n\t");
 
   }
 

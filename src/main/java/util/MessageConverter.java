@@ -15,7 +15,4 @@ public class MessageConverter {
                 .replaceAll(CAMEL_CASE_REGEX, "$1 $2")
                 .replaceAll("_", " ");
     }
-
-    private static final String XML_REGEX = "(<.*\">)|(</.*>)";
-
 }
