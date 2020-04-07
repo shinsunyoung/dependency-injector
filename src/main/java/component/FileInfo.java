@@ -20,9 +20,6 @@ public class FileInfo {
     } else {
       this.build = "gradle";
     }
-
     return this.build;
-
   }
-
 }
