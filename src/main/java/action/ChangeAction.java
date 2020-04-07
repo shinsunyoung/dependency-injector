@@ -30,7 +30,6 @@ public abstract class ChangeAction extends AnAction {
         });
   }
 
-
   protected abstract void init(AnActionEvent e);
 
   protected abstract void action(String text, String fileName, String dependencyText);

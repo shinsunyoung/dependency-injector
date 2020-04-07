@@ -39,7 +39,6 @@ public class Changer extends ChangeAction {
     }
   }
 
-
   public LookupElement[] getProposeList(@NotNull String text, @NotNull String fileType) {
 
     List<LookupElement> lookupElements = new ArrayList<>();

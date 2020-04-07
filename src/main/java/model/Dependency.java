@@ -6,6 +6,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class Dependency {
+
   private String version;
   private int popular;
 
@@ -18,15 +19,18 @@ public class Dependency {
     Document doc = Jsoup.connect(path + "/" + this.version).get();
     Elements content;
 
-    if(fileType.equals("maven")){
+    if (fileType.equals("maven")) {
       content = doc.select("#maven-div textarea");
     } else {
       content = doc.select("#gradle-div textarea");
     }
 
-    if(content.size() == 0) return "not found!";
+    if (content.size() == 0) {
+      return "not found!";
+    }
 
-    String text = fileType.equals("gradle") ? content.get(0).text().replaceAll("\n", "\n\t") : content.get(0).text();
+    String text = fileType.equals("gradle") ? content.get(0).text().replaceAll("\n", "\n\t")
+        : content.get(0).text();
 
     return text;
 
