@@ -1,5 +1,5 @@
 <idea-plugin>
-    <id>dependencyInjector</id>
+    <id>DependencyInjector</id>
     <name>Dependency Injector</name>
     <vendor email="ajufresh@gmail.com" url="https://github.com/shinsunyoung/dependency-injector">Github</vendor>
 
