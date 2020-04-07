@@ -6,11 +6,16 @@ import component.FileInfo;
 import component.Selector;
 import java.util.concurrent.CompletableFuture;
 import org.jetbrains.annotations.NotNull;
+import util.LoadingUtils;
 
 public abstract class ChangeAction extends AnAction {
 
+
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
+
+    LoadingUtils loadingComponent = new LoadingUtils(e);
+    loadingComponent.showPopUp();
 
     String selectedText = new Selector(e).getSelectedText();
     String fileType = new FileInfo(e).getBuildName();
@@ -21,10 +26,12 @@ public abstract class ChangeAction extends AnAction {
     // 비동기 Action 실행
     CompletableFuture.supplyAsync(() -> (selectedText))
         .thenAccept(dependencyText -> {
+          loadingComponent.hidePopUp();
           action(selectedText, fileType, dependencyText);
         });
 
   }
+
 
   protected abstract void init(AnActionEvent e);
 
