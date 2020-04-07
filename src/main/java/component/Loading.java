@@ -47,6 +47,4 @@ public class Loading {
     balloon.hide();
   }
 
-
-
 }

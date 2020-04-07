@@ -1,41 +1,17 @@
 package model;
 
 import java.io.IOException;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
 public class Dependency {
-//  private String group;
-//  private String name;
   private String version;
-//  private String build;
   private int popular;
 
-
-  public void setVersion(String version) {
+  public Dependency(String version, int popular) {
     this.version = version;
-  }
-
-  public void setPopular(int popular) {
     this.popular = popular;
-  }
-
-  public String getVersion() {
-    return version;
-  }
-
-  public int getPopular() {
-    return popular;
-  }
-
-  public Dependency() {
   }
 
   public String getSource(String path, String fileType) throws IOException {

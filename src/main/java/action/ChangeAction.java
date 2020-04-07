@@ -10,7 +10,6 @@ import component.Loading;
 
 public abstract class ChangeAction extends AnAction {
 
-
   @Override
   public void actionPerformed(@NotNull AnActionEvent e) {
 
@@ -29,7 +28,6 @@ public abstract class ChangeAction extends AnAction {
           loadingComponent.hidePopUp();
           action(selectedText, fileType, dependencyText);
         });
-
   }
 
 
