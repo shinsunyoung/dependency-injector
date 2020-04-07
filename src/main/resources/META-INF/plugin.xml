@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>org.example.dependency_inserter</id>
-    <name>Find dependencies in mvnrepository and inject them where you want them.</name>
+    <id>dependencyInjector</id>
+    <name>Dependency Injector</name>
     <vendor email="ajufresh@gmail.com" url="https://github.com/shinsunyoung/dependency-injector">Github</vendor>
 
     <description><![CDATA[
@@ -13,7 +13,7 @@
 
         <h2>How To Use</h2>
         <p>
-            Select the keyword you want to inject dependency, and  press the shortcut button <b>Ctrl+Shift+D</b>.
+            Select the keyword you want to inject dependency, and press the shortcut button <b>Ctrl+Shift+D</b>.
             the pluging then searches the <a href="https://mvnrepository.com">mvnrepository.com</a> for thre word and shows three choices in order of popularity.
             If you select the dependency you want, find the most popular version and inject it automatically for each build tool. (maven, gradle)
         </p> <br/>
@@ -36,11 +36,9 @@
     </extensions>
 
     <actions>
-
         <action id="action.impl.Changer" class="action.impl.Changer" text="change dependency">
             <keyboard-shortcut first-keystroke="ctrl shift d" keymap="$default"/>
         </action>
-
     </actions>
 
 
