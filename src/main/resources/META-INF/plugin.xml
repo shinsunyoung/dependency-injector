@@ -6,15 +6,18 @@
     <description><![CDATA[
 
         <h1>Dependency Injector</h1>
-        <a href="https://github.com/yiyingcanfeng/maven-dependency-helper">GitHub</a> |
-        <a href="https://github.com/yiyingcanfeng/maven-dependency-helper/issues">Issues</a> <br/>
-
         IntelliJ Plugin for searching most popular dependency in a single click(shortcut).<br/>
+
+        <h2>Short cut</h2>
+        <ul>
+            <li> Window : Alt + Shift + D </li>
+            <li> Mac : Command + Shift + D </li>
+        </ul>
 
         <h2>How To Use</h2>
         <p>
-            Select the keyword you want to inject dependency, and press the shortcut button <b>Ctrl+Shift+D</b>.
-            the pluging then searches the <a href="https://mvnrepository.com">mvnrepository.com</a> for thre word and shows three choices in order of popularity.
+            Select the keyword you want to inject dependency, and press the shortcut button <b>Ctrl+Shift+D</b>. <br/>
+            the pluging then searches the <a href="https://mvnrepository.com">mvnrepository.com</a> for thre word and shows three choices in order of popularity. <br/>
             If you select the dependency you want, find the most popular version and inject it automatically for each build tool. (maven, gradle)
         </p> <br/>
 
@@ -26,6 +29,15 @@
 
     ]]>
     </description>
+
+    <change-notes>
+        <![CDATA[
+      <a href="https://github.com/jojoldu/translator/tree/0.0.15"><b>v0.0.15</b></a> (2018-07-28) <br/><br/>
+      <ul>
+        <li>0.0.1: Project initiate</li>
+      </ul>
+    ]]>
+    </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
