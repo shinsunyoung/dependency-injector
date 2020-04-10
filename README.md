@@ -17,7 +17,9 @@ If you select the dependency you want, find the most popular version and inject 
 <br>
 
 ![image](https://github.com/shinsunyoung/dependency-injector/blob/master/maven.gif?raw=true) <br>
-pom.xml (Maven)
+pom.xml (Maven) 
+
+<br>
 
 ![image](https://github.com/shinsunyoung/dependency-injector/blob/master/gradle.gif?raw=true) <br>
 build.gradle (Gradle)
