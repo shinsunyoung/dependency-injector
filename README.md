@@ -1,6 +1,8 @@
 # dependency-injector
 intelliJ plugin for inject dependency easily and quickly
 
+<br>
+
 ## Short Cut
 <ul>
     <li> Window : <code>Alt + Shift + D</code> </li>
