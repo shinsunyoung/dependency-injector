@@ -15,7 +15,7 @@
             <li> Mac : Command + Shift + D </li>
         </ul>
 
-        <h2>How To Use</h2>
+        <h2>How To Use?</h2>
         <p>
             Select the keyword you want to inject dependency, and press the shortcut button <b>Ctrl+Shift+D</b>. <br/>
             the pluging then searches the <a href="https://mvnrepository.com">mvnrepository.com</a> for thre word and shows three choices in order of popularity. <br/>
@@ -31,21 +31,17 @@
     ]]>
     </description>
 
-    <change-notes>
-        <![CDATA[
-      <a href="https://github.com/jojoldu/translator/tree/0.0.15"><b>v0.0.15</b></a> (2018-07-28) <br/><br/>
-      <ul>
-        <li>1.0 : Project initiate</li>
-      </ul>
+    <change-notes><![CDATA[
+      New project initiate. support by jsoup and mvnrepository.
     ]]>
     </change-notes>
 
-    <idea-version since-build="183" until-build="183.*"/>
+
+    <idea-version since-build="183.0"/>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.third.party.plugin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
