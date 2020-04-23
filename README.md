@@ -1,5 +1,5 @@
 # dependency-injector
-intelliJ plugin for inject dependency easily and quickly
+intelliJ Plugin automatically injects the most popular version
 
 <br>
 
