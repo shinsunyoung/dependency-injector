@@ -19,7 +19,7 @@ import org.jsoup.select.Elements;
 
 public class Changer extends ChangeAction {
 
-  private static final String REQUEST_URL = "https://mvnrepository.com/search?q={}&sort=popular";
+  private static final String REQUEST_URL = "https://mvnrepository.com/search?q={}&sort=relevance";
 
   private Editor editor;
 
