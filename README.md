@@ -25,3 +25,9 @@ pom.xml (Maven)
 
 ![image](https://github.com/shinsunyoung/dependency-injector/blob/master/gradle.gif?raw=true) <br>
 build.gradle (Gradle)
+
+<br>
+
+## Change Note
+1.0 : New project initiate.
+1.1 : Change sort order from popularity to relevance
