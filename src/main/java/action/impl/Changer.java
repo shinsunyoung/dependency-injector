@@ -8,11 +8,14 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
+import groovy.util.logging.Slf4j;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import model.Dependency;
 import org.jetbrains.annotations.NotNull;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -32,7 +35,8 @@ public class Changer extends ChangeAction {
   protected void action(String text, String fileType, String dependencyText) {
 
     if (editor != null) {
-      LookupManager lookupManager = LookupManager.getInstance(editor.getProject());
+      LookupManager lookupManager = LookupManager.getInstance(
+          Objects.requireNonNull(editor.getProject()));
       ApplicationManager
           .getApplication().invokeLater(
           () -> lookupManager.showLookup(editor, getProposeList(dependencyText, fileType)));
@@ -51,7 +55,7 @@ public class Changer extends ChangeAction {
       int count = 0;
 
       for (int i = 0; i < contents.size(); i += 2) {
-        if (count >= 3) { // 리스트 최대 갯수 3
+        if (count >= 3) { // 리스트 최대 갯수를 3으로 설정
           break;
         }
 
@@ -70,7 +74,7 @@ public class Changer extends ChangeAction {
 
           Elements searchByA = subPopular.get(j).select("a");
 
-          if (searchByA.size() != 0) { // size 0 == 0
+          if (!searchByA.isEmpty()) { // size 0 == 0
             int popular = Integer.parseInt(searchByA.get(0).text().replaceAll(",", ""));
 
             if (max < popular) {
@@ -80,13 +84,16 @@ public class Changer extends ChangeAction {
           }
         }
 
-        LookupElement element = LookupElementBuilder
-            .create(
-                new Dependency(version, max).getSource(subUrl, fileType)) // value(값이 중복되면 하나만 나옴)
-            .withPresentableText(
-                contents.get(i + 1).text() + "(" + contents.get(i).text() + ")"); // key
-        lookupElements.add(element);
-
+        try {
+          LookupElement element = LookupElementBuilder
+              .create(
+                  new Dependency(version, max).getSource(subUrl, fileType)) // value
+              .withPresentableText(
+                  contents.get(i + 1).text() + "(" + contents.get(i).text() + ")"); // key
+          lookupElements.add(element);
+        } catch (HttpStatusException ex) {
+          ex.getStackTrace();
+        }
         count++;
       }
 
@@ -94,7 +101,6 @@ public class Changer extends ChangeAction {
       ex.printStackTrace();
     }
 
-    return lookupElements.stream()
-        .toArray(LookupElement[]::new);
+    return lookupElements.toArray(new LookupElement[0]);
   }
 }
