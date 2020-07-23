@@ -1,5 +1,8 @@
 package action.impl;
 
+import static util.Config.REQUEST_URL;
+import static util.Config.SUB_REQUEST_URL;
+
 import action.ChangeAction;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
@@ -8,7 +11,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.Editor;
-import groovy.util.logging.Slf4j;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +23,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 public class Changer extends ChangeAction {
-
-  private static final String REQUEST_URL = "https://mvnrepository.com/search?q={}&sort=relevance";
 
   private Editor editor;
 
@@ -46,7 +46,7 @@ public class Changer extends ChangeAction {
   public LookupElement[] getProposeList(@NotNull String text, @NotNull String fileType) {
 
     List<LookupElement> lookupElements = new ArrayList<>();
-    String url = REQUEST_URL.replace("{}", text);
+    String url = REQUEST_URL.replace("{search}", text);
 
     try {
       Document doc = Jsoup.connect(url).get();
@@ -59,9 +59,8 @@ public class Changer extends ChangeAction {
           break;
         }
 
-        String subUrl =
-            "https://mvnrepository.com/artifact/" + contents.get(i).text() + "/" + contents
-                .get(i + 1).text();
+        String subUrl = SUB_REQUEST_URL.replace("{project}", contents.get(i).text())
+            .replace("{version}",  contents.get(i + 1).text());
 
         Document subDocs = Jsoup.connect(subUrl).get();
         Elements subContents = subDocs.select("tbody tr td a.vbtn.release");
