@@ -15,12 +15,12 @@ public class Dependency {
     this.popular = popular;
   }
 
-  public String getSource(String path, String fileType) throws IOException {
+  public String getSource(String path, BuildType buildType) throws IOException {
 
     Document doc = Jsoup.connect(path + "/" + this.version).get();
     Elements content;
 
-    if (fileType.equals("maven")) {
+    if (buildType == BuildType.MAVEN) {
       content = doc.select("#maven-div textarea");
     } else {
       content = doc.select("#gradle-div textarea");

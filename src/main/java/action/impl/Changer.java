@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import model.BuildType;
 import model.Dependency;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.HttpStatusException;
@@ -32,18 +33,15 @@ public class Changer extends ChangeAction {
   }
 
   @Override
-  protected void action(String text, String fileType, String dependencyText) {
-
-    if (editor != null) {
-      LookupManager lookupManager = LookupManager.getInstance(
-          Objects.requireNonNull(editor.getProject()));
-      ApplicationManager
-          .getApplication().invokeLater(
-          () -> lookupManager.showLookup(editor, getProposeList(dependencyText, fileType)));
-    }
+  protected void action(String text, BuildType buildType, String dependencyText) {
+    Objects.requireNonNull(editor);
+    LookupManager lookupManager = LookupManager
+        .getInstance(Objects.requireNonNull(editor.getProject()));
+    ApplicationManager
+        .getApplication().invokeLater(() -> lookupManager.showLookup(editor, getDependencyList(dependencyText, buildType)));
   }
 
-  public LookupElement[] getProposeList(@NotNull String text, @NotNull String fileType) {
+  public LookupElement[] getDependencyList(@NotNull String text, @NotNull BuildType buildType) {
 
     List<LookupElement> lookupElements = new ArrayList<>();
     String url = REQUEST_URL.replace("{search}", text);
@@ -86,7 +84,7 @@ public class Changer extends ChangeAction {
         try {
           LookupElement element = LookupElementBuilder
               .create(
-                  new Dependency(version, max).getSource(subUrl, fileType)) // value
+                  new Dependency(version, max).getSource(subUrl, buildType)) // value
               .withPresentableText(
                   contents.get(i + 1).text() + "(" + contents.get(i).text() + ")"); // key
           lookupElements.add(element);
