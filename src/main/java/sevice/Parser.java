@@ -6,5 +6,6 @@ import model.Dependency;
 
 public interface Parser {
 
-  List<Dependency> getDependencies(String keyword) throws IOException;
+  List<Dependency> parseDependencies(String keyword) throws IOException;
+
 }
