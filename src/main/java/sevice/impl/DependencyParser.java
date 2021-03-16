@@ -3,6 +3,8 @@ package sevice.impl;
 import static util.ListConfig.LIST_MAXIMUM_SIZE;
 import static util.UrlConfig.DEPENDENCY_REQUEST_URL;
 
+import com.intellij.codeInsight.lookup.LookupElement;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,23 @@ import org.jsoup.select.Elements;
 import sevice.Parser;
 
 public class DependencyParser implements Parser {
+  public LookupElement[] getDependencies(String keyword) throws IOException {
+    List<Dependency> dependencies = parseDependencies(keyword);
+    List<LookupElement> lookupElements = new ArrayList<>();
 
-  @Override
-  public List<Dependency> parseDependencies(String keyword) throws IOException {
+    for (Dependency dependency : dependencies) {
+      LookupElement element = LookupElementBuilder
+          .create("value")
+          .withPresentableText(dependency.getDisplayName()); // key
+
+      lookupElements.add(element);
+    }
+
+    return lookupElements.stream()
+        .toArray(LookupElement[]::new);
+  }
+
+  private List<Dependency> parseDependencies(String keyword) throws IOException {
     List<Dependency> dependencies = new ArrayList<>();
     Elements names = getNameList(keyword);
 

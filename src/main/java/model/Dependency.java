@@ -7,12 +7,19 @@ import org.jsoup.select.Elements;
 
 public class Dependency {
 
+  private DependencyName name;
   private String version;
-  private int popular;
 
-  public Dependency(String version, int popular) {
-    this.version = version;
-    this.popular = popular;
+  public Dependency(DependencyName name) {
+    this.name = name;
+  }
+
+  public DependencyName getName() {
+    return name;
+  }
+
+  public String getDisplayName() {
+    return name.getProjectName() + "(" + name.getPackageName() + ")";
   }
 
   public String getSource(String path, BuildType buildType) throws IOException {
