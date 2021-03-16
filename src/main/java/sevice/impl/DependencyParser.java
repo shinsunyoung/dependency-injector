@@ -1,44 +1,34 @@
 package sevice.impl;
 
 import static util.ListConfig.LIST_MAXIMUM_SIZE;
-import static util.UrlConfig.DEPENDENCY_REQUEST_URL;
+import static util.ParserConfig.ALL_VERSION_SELECTOR;
+import static util.ParserConfig.DEPENDENCY_REQUEST_URL;
+import static util.ParserConfig.SUB_REQUEST_URL;
+import static util.ParserConfig.USED_VERSION_SELECTOR;
+import static util.ParserConfig.VERSION_NAME_LIST_SELECTOR;
+import static util.ParserConfig.VERSION_USAGES_LIST_SELECTOR;
 
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Dependency;
 import model.DependencyName;
+import model.Version;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import sevice.Parser;
 
 public class DependencyParser implements Parser {
-  public LookupElement[] getDependencies(String keyword) throws IOException {
-    List<Dependency> dependencies = parseDependencies(keyword);
-    List<LookupElement> lookupElements = new ArrayList<>();
-
-    for (Dependency dependency : dependencies) {
-      LookupElement element = LookupElementBuilder
-          .create("value")
-          .withPresentableText(dependency.getDisplayName()); // key
-
-      lookupElements.add(element);
-    }
-
-    return lookupElements.stream()
-        .toArray(LookupElement[]::new);
-  }
-
-  private List<Dependency> parseDependencies(String keyword) throws IOException {
+  public List<Dependency> parseDependencies(String keyword) throws IOException {
     List<Dependency> dependencies = new ArrayList<>();
-    Elements names = getNameList(keyword);
+    Elements names = getDependencyNames(keyword);
 
     for (Element name : names) {
       DependencyName dependencyName = getDependencyName(name);
-      dependencies.add(new Dependency(dependencyName));
+      Version version = getVersion(dependencyName);
+
+      dependencies.add(new Dependency(dependencyName, version));
 
       if (listFull(dependencies.size())) {
         break;
@@ -48,7 +38,7 @@ public class DependencyParser implements Parser {
     return dependencies;
   }
 
-  private Elements getNameList(String keyword) throws IOException {
+  private Elements getDependencyNames(String keyword) throws IOException {
     return Jsoup
         .connect(DEPENDENCY_REQUEST_URL + keyword)
         .get()
@@ -62,6 +52,54 @@ public class DependencyParser implements Parser {
     String packageName = nameInfo.get(0).text();
 
     return new DependencyName(projectName, packageName);
+  }
+
+  private Version getVersion(DependencyName name) throws IOException {
+    Elements versions = getAllVersions(name);
+
+    Elements versionList = getVersionList(versions);
+    Elements usagesList = getUsagesList(versions);
+
+    String mostPopularVersion = getMostPopularVersion(versionList, usagesList);
+
+    return new Version(mostPopularVersion);
+  }
+
+  private Elements getAllVersions(DependencyName name) throws IOException {
+    String subUrl = SUB_REQUEST_URL
+        .replace("{project}", name.getPackageName())
+        .replace("{version}", name.getProjectName());
+
+    return Jsoup.connect(subUrl).get().select(ALL_VERSION_SELECTOR);
+  }
+
+  private Elements getVersionList(Elements versions) {
+    return versions.select(VERSION_NAME_LIST_SELECTOR);
+  }
+
+  private Elements getUsagesList(Elements versions) {
+    return versions.select(VERSION_USAGES_LIST_SELECTOR);
+  }
+
+  private String getMostPopularVersion(Elements versionList, Elements usagesList) {
+    String mostPopularVersion = "";
+    int mostUsages = 0;
+
+    for (int i = 0; i < versionList.size(); i++) {
+      int usages = getUsage(usagesList.get(i));
+
+        if (mostUsages < usages) {
+          mostUsages = usages;
+          mostPopularVersion = versionList.get(i).text();
+        }
+    }
+
+    return mostPopularVersion;
+  }
+
+  private int getUsage(Element usage) {
+    Elements usagesValueList = usage.select(USED_VERSION_SELECTOR);
+    return usagesValueList.isEmpty() ? 0 : Integer.parseInt(usagesValueList.first().text().replace(",", ""));
   }
 
   private boolean listFull(int listSize) {

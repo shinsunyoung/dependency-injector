@@ -8,18 +8,19 @@ import org.jsoup.select.Elements;
 public class Dependency {
 
   private DependencyName name;
-  private String version;
+  private Version version;
 
-  public Dependency(DependencyName name) {
+  public Dependency(DependencyName name, Version version) {
     this.name = name;
+    this.version = version;
   }
 
   public DependencyName getName() {
     return name;
   }
 
-  public String getVersion() {
-    return version;
+  public String getMostPopularVersion() {
+    return version.getVersion();
   }
 
   public String getDisplayName() {

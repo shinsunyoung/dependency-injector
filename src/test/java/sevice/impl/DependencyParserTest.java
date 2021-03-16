@@ -39,10 +39,10 @@ public class DependencyParserTest {
     DependencyParser parser = new DependencyParser();
 
     // when
-    List<Dependency> dependencies = parser.parseDependencies("asdf");
+    List<Dependency> dependencies = parser.parseDependencies("lombok");
 
     // then
-    assertThat(dependencies.get(0).getVersion()).isEqualTo("1.18.12");
+    assertThat(dependencies.get(0).getMostPopularVersion()).isEqualTo("1.18.12");
   }
 
   @DisplayName("총 검색 갯수가 3개 미만이면 모두 가져온다.")
