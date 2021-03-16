@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 
 public class DependencyParserTest {
 
-  @DisplayName("검색어와 관련 있는 순서대로 의존성을 5개 가져온다.")
+  @DisplayName("검색어와 관련 있는 순서대로 의존성을 3개 가져온다. - 이름")
   @Test
   public void getDependencies() throws IOException {
     // given
@@ -21,20 +21,31 @@ public class DependencyParserTest {
     List<Dependency> dependencies = parser.parseDependencies("lombok");
 
     // then
-    assertThat(dependencies.size()).isEqualTo(5);
+    assertThat(dependencies.size()).isEqualTo(3);
 
     List<String> displayNames = Arrays.asList("lombok(org.projectlombok)",
         "lombok-maven-plugin(org.projectlombok)",
-        "lombok(io.mateu)",
-        "lombok-maven(org.projectlombok)",
-        "lombok-pg(com.github.peichhorn)");
+        "lombok(io.mateu)");
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       assertThat(dependencies.get(i).getDisplayName()).isEqualTo(displayNames.get(i));
     }
   }
 
-  @DisplayName("총 검색 갯수가 5개 미만이면 모두 가져온다.")
+  @DisplayName("의존성은 가장 인기있는 버전을 가져온다.")
+  @Test
+  public void getMostFamousDependency() throws IOException {
+    // given
+    DependencyParser parser = new DependencyParser();
+
+    // when
+    List<Dependency> dependencies = parser.parseDependencies("asdf");
+
+    // then
+    assertThat(dependencies.get(0).getVersion()).isEqualTo("1.18.12");
+  }
+
+  @DisplayName("총 검색 갯수가 3개 미만이면 모두 가져온다.")
   @Test
   public void getAllIfTotalLessThan5() throws IOException {
     // given

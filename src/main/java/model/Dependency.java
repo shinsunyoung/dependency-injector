@@ -18,6 +18,10 @@ public class Dependency {
     return name;
   }
 
+  public String getVersion() {
+    return version;
+  }
+
   public String getDisplayName() {
     return name.getProjectName() + "(" + name.getPackageName() + ")";
   }
