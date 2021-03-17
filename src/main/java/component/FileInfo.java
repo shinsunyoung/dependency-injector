@@ -7,16 +7,20 @@ import model.BuildType;
 
 public class FileInfo {
 
-  private String name;
-  private BuildType build;
+  private final String name;
+  private final BuildType build;
 
   public FileInfo(AnActionEvent e) {
     VirtualFile vFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
     this.name = vFile != null ? vFile.getName() : "";
+    this.build = BuildType.findByExtension(name);
   }
 
-  public BuildType getBuildName() {
-    build = name.contains(".xml") ? BuildType.MAVEN : BuildType.GRADLE;
+  public String getName() {
+    return name;
+  }
+
+  public BuildType getBuild() {
     return build;
   }
 }
