@@ -1,4 +1,4 @@
-package sevice;
+package service;
 
 public interface Parser {
 

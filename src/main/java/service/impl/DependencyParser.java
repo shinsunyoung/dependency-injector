@@ -1,9 +1,9 @@
-package sevice.impl;
+package service.impl;
 
 import static util.ListConfig.LIST_MAXIMUM_SIZE;
 import static util.ParserConfig.ALL_VERSION_SELECTOR;
 import static util.ParserConfig.DEPENDENCY_REQUEST_URL;
-import static util.ParserConfig.SUB_REQUEST_URL;
+import static util.ParserConfig.VERSION_REQUEST_URL;
 import static util.ParserConfig.USED_VERSION_SELECTOR;
 import static util.ParserConfig.VERSION_NAME_LIST_SELECTOR;
 import static util.ParserConfig.VERSION_USAGES_LIST_SELECTOR;
@@ -17,7 +17,7 @@ import model.Version;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import sevice.Parser;
+import service.Parser;
 
 public class DependencyParser implements Parser {
   public List<Dependency> parseDependencies(String keyword) throws IOException {
@@ -66,9 +66,9 @@ public class DependencyParser implements Parser {
   }
 
   private Elements getAllVersions(DependencyName name) throws IOException {
-    String subUrl = SUB_REQUEST_URL
-        .replace("{project}", name.getPackageName())
-        .replace("{version}", name.getProjectName());
+    String subUrl = VERSION_REQUEST_URL
+        .replace("{package}", name.getPackageName())
+        .replace("{project}", name.getProjectName());
 
     return Jsoup.connect(subUrl).get().select(ALL_VERSION_SELECTOR);
   }
