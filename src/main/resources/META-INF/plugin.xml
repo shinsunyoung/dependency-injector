@@ -45,7 +45,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <applicationService serviceInterface="service.GradleCodeParser" serviceImplementation="service.impl.GradleCodeParserImpl"/>
+        <applicationService serviceInterface="service.MavenCodeParser" serviceImplementation="service.impl.MavenCodeParserImpl"/>
     </extensions>
 
     <actions>
