@@ -18,7 +18,7 @@ public class GradleCodeParserTest {
     // given
     GradleCodeParserImpl parser = new GradleCodeParserImpl();
 
-    DependencyName dependencyName = new DependencyName("org.projectlombok", "lombok");
+    DependencyName dependencyName = new DependencyName("lombok", "org.projectlombok");
     Version version = new Version("1.18.14");
 
     // when
