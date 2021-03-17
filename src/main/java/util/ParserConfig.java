@@ -10,6 +10,6 @@ public class ParserConfig {
   public static final String VERSION_USAGES_LIST_SELECTOR = "td:nth-last-child(2)";
   public static final String USED_VERSION_SELECTOR = "a";
   public static final String GRADLE_SOURCE_SELECTOR = "#gradle-div textarea";
-  public static final String MAVEN_SOURCE_SELECTOR = "";
+  public static final String MAVEN_SOURCE_SELECTOR = "#maven-div textarea";
 
 }
