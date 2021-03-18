@@ -1,7 +1,9 @@
 package service.impl;
 
 import static util.ListConfig.LIST_MAXIMUM_SIZE;
+import static util.ParserConfig.ALL_DEPENDENCY_NAME_LIST_SELECTOR;
 import static util.ParserConfig.ALL_VERSION_SELECTOR;
+import static util.ParserConfig.DEPENDENCY_NAME_SELECTOR;
 import static util.ParserConfig.DEPENDENCY_REQUEST_URL;
 import static util.ParserConfig.VERSION_REQUEST_URL;
 import static util.ParserConfig.USED_VERSION_SELECTOR;
@@ -22,11 +24,10 @@ import service.Parser;
 public class DependencyParser implements Parser {
   public List<Dependency> parseDependencies(String keyword) throws IOException {
     List<Dependency> dependencies = new ArrayList<>();
-    Elements names = getDependencyNames(keyword);
 
-    for (Element name : names) {
+    for (Element name : getDependencyNames(keyword)) {
       DependencyName dependencyName = getDependencyName(name);
-      Version version = getVersion(dependencyName);
+      Version version = getMostPopularVersion(dependencyName);
 
       dependencies.add(new Dependency(dependencyName, version));
 
@@ -42,11 +43,11 @@ public class DependencyParser implements Parser {
     return Jsoup
         .connect(DEPENDENCY_REQUEST_URL + keyword)
         .get()
-        .select(".im-subtitle");
+        .select(ALL_DEPENDENCY_NAME_LIST_SELECTOR);
   }
 
   private DependencyName getDependencyName(Element name) {
-    Elements nameInfo = name.select("a");
+    Elements nameInfo = name.select(DEPENDENCY_NAME_SELECTOR);
 
     String projectName = nameInfo.get(1).text();
     String packageName = nameInfo.get(0).text();
@@ -54,7 +55,7 @@ public class DependencyParser implements Parser {
     return new DependencyName(projectName, packageName);
   }
 
-  private Version getVersion(DependencyName name) throws IOException {
+  private Version getMostPopularVersion(DependencyName name) throws IOException {
     Elements versions = getAllVersions(name);
 
     Elements versionList = getVersionList(versions);
