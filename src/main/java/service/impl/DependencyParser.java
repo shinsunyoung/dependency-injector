@@ -1,6 +1,7 @@
 package service.impl;
 
 import static util.ListConfig.LIST_MAXIMUM_SIZE;
+import static util.ParserConfig.ALL_DEPENDENCY_NAME_LIST_SELECTOR;
 import static util.ParserConfig.ALL_VERSION_SELECTOR;
 import static util.ParserConfig.DEPENDENCY_REQUEST_URL;
 import static util.ParserConfig.VERSION_REQUEST_URL;
@@ -42,7 +43,7 @@ public class DependencyParser implements Parser {
     return Jsoup
         .connect(DEPENDENCY_REQUEST_URL + keyword)
         .get()
-        .select(".im-subtitle");
+        .select(ALL_DEPENDENCY_NAME_LIST_SELECTOR);
   }
 
   private DependencyName getDependencyName(Element name) {
