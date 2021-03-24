@@ -10,6 +10,10 @@ public class Dependency {
     this.version = version;
   }
 
+  public static Dependency of(DependencyName name, Version version) {
+    return new Dependency(name, version);
+  }
+
   public DependencyName getName() {
     return name;
   }
