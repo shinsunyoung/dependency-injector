@@ -1,7 +1,7 @@
 <idea-plugin url="https://github.com/shinsunyoung/dependency-injector">
     <id>DependencyInjector</id>
     <name>Dependency Injector</name>
-    <version>1.1</version>
+    <version>1.2</version>
     <vendor email="ajufresh@gmail.com">shinsunyoung</vendor>
 
     <description><![CDATA[
@@ -34,6 +34,7 @@
     <change-notes><![CDATA[
       1.0 : New project initiate. support by jsoup and mvnrepository. <br>
       1.1 : Change sort order from popularity to relevance <br>
+      1.2 : Performance improvement (approximately 30%) <br>
     ]]>
     </change-notes>
 
