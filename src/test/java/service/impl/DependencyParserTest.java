@@ -8,7 +8,6 @@ import java.util.List;
 import model.Dependency;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import service.impl.DependencyParser;
 
 public class DependencyParserTest {
 

@@ -31,3 +31,4 @@ build.gradle (Gradle)
 ## Change Note
 1.0 : New project initiate. <br>
 1.1 : Change sort order from popularity to relevance
+1.2 : Performance improvement (approximately 30%)

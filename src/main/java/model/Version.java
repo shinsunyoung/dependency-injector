@@ -10,4 +10,8 @@ public class Version {
   public Version(String version) {
     this.version = version;
   }
+
+  public static Version unknown() {
+    return new Version("unknown");
+  }
 }
